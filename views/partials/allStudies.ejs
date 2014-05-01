@@ -1,0 +1,128 @@
+<h1>All Studies</h1>
+      <div class="row">
+        <div class="col-md-8">
+          <! -- Status Panel -->
+            <div class="table-responsive">
+      <table class="table">
+                <tbody>
+                  <tr class="text-center">
+                    <td>
+                      <h4>TOTAL STUDIES</h4>
+                      <span id="dashboard-total-studies">14</span>
+                    </td>
+                    <td>
+                      <h5> <span class="glyphicon glyphicon-repeat glyphicon-padding-right"></span> RUNNING</h5>
+                      <span class="dashboard-icons">10</span>
+                    </td>
+                    <td>
+                      <h5> <span class="glyphicon glyphicon-ok glyphicon-padding-right"></span> COMPLETE</h5>
+                      <span class="dashboard-icons">3</span>
+                    </td>
+                    <td>
+                      <h5> <span class="glyphicon glyphicon-pencil glyphicon-padding-right"></span> DRAFT</h5>
+                      <span class="dashboard-icons">1</span>
+                    </td>
+                    <td>
+                      <h5> <span class="glyphicon glyphicon-book glyphicon-padding-right"></span> ARCHIVED</h5>
+                      <span class="dashboard-icons">0</span>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          <! -- Studies Panel -->
+          <div class="panel panel-default">
+            <div class="panel-heading text-right">
+                <a href="/newstudy.php"><button type="button" class="btn btn-primary"><span class="glyphicon glyphicon-plus"></span> Create Study</button></a>
+            </div>
+            <div class="table-responsive">
+              <table class="table table-hover">
+                <thead>
+                  <tr>
+                    <th>Status</th>
+                    <th>Name</th>
+                    <th>Date Created</th>
+                  </tr>
+                </thead>
+                <tbody class="table-active">
+                  <tr ng-repeat="study in studies" ng-click="getStudyDetails(study.studyId); setSelected(this)" class="{{selected}}">
+                    <td class="text-center">
+                      <!-- Display the correct icon based on study status -->
+                      <span class="glyphicon glyphicon-repeat" ng-if="study.status == 'scheduled'"></span>
+                      <span class="glyphicon glyphicon-ok" ng-if="study.status == 'completed'"></span>
+                      <span class="glyphicon glyphicon-pencil" ng-if="study.status == 'draft'"></span>
+                      <span class="glyphicon glyphicon-book" ng-if="study.status == 'archived'"></span>
+                      <p>{{study.status}}</p>
+                    </td>
+                    <td>
+                      <a href="">{{study.name}}</a>
+                      <p>{{study.description}}</p>
+                    </td>
+                    <td>{{study.dateCreated | date: 'mediumDate'}} at {{study.dateCreated | date: 'shortTime'}}</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+        <! -- Details Panel -->
+        <div class="col-md-4" ng-if="studyDetails">
+          <div class="panel panel-default">
+            <div class="panel-heading">
+              <div class="row">
+                <div class="col-md-6">
+                  <h4>Study Summary</h4>
+                </div>
+                <div class="col-md-6 text-right">
+                  <div class="btn-group">
+                    <button type="button" class="btn btn-default"><span class="glyphicon glyphicon-print"></span></button>              
+                    <button type="button" class="btn btn-default"><span class="glyphicon glyphicon-download-alt"></span></button>
+                  </div>                
+                </div>
+              </div>
+            </div>
+            <div class="panel-body">
+                <a href=""><h5>{{studyDetails.name}}</h5></a>
+                <p>{{studyDetails.description}}</p>
+            </div>
+            <div class="table-responsive">
+              <table class="table">
+                <thead>
+                  <tr class="active">
+                    <th>Sessions</th>
+                    <th>Participants</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr ng-repeat="studyPeriod in studyDetails.studyPeriods">
+                    <td>
+                      <h5>{{studyPeriod.name}}</h5>
+                      <p><b>Start:</b> {{studyPeriod.startDate | date: 'mediumDate'}} at {{studyPeriod.startDate | date: 'shortTime'}}</p>
+                      <p><b>End:</b> {{studyPeriod.endDate | date: 'mediumDate'}} at {{studyPeriod.endDate | date: 'shortTime'}}</p>
+                    </td>
+                    <td>
+                      <p>{{studyPeriod.active}} Active</p>
+                      <p>{{studyPeriod.completed}} Completed</p>
+                      <p>{{studyPeriod.aborted}} Aborted</p>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+<!-- Period Data panel currently not implemented yet
+          <div class="panel panel-default">
+            <div class="panel-heading">
+              <div class="row">
+                <div class="col-md-12">
+                  <h4>Study Periods</h4>
+                </div>
+              </div>
+            </div>
+            <div class="panel-body">
+              <p class="text-center">Period DATA goes here</p>
+            </div>
+          </div>
+-->
+       </div>
+     </div>
