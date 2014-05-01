@@ -3,7 +3,7 @@
  */
 
 // For a real app, you'd make database requests here.
-// For this example, "data" acts like an in-memory "database"
+// For this example, "studies" acts like an in-memory "database"
   var studies = [
     {
       studyId: 1,
